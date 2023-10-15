@@ -6,115 +6,48 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @JsonSerialize
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+    @Column(name = "email_id", nullable = false, unique = true)
     private String emailId;
+    @Column(name="age", nullable = false)
     private int age;
+    @Column(name="phone", nullable = false)
     private String phone;
+    @Column(name="role", nullable = false)
     private Role role;
+    @Column(name="password", nullable = false)
     private String password;
+    @Column(name="manager_name", nullable = false)
     private String managerName;
+    @Column(name="address", nullable = false)
     private String address;
+    @Column(name="tag", nullable = false)
     private String tag;
 
 
     public enum Role {
         MGR, REPORTEE, ADMIN;
-    }
-
-    public User() {
-    }
-
-    public User(String firstName,
-                String lastName,
-                String emailId,
-                int age,
-                String phone,
-                Role role,
-                String password,
-                String managerName,
-                String address,
-                String tag) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailId = emailId;
-        this.age = age;
-        this.phone = phone;
-        this.role = role;
-        this.password = password;
-        this.managerName = managerName;
-        this.address = address;
-        this.tag = tag;
-    }
-
-    public User(int id, String firstName, String lastName, String emailId, int age, String phone, Role role, String password, String managerName, String address, String tag) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailId = emailId;
-        this.age = age;
-        this.phone = phone;
-        this.role = role;
-        this.password = password;
-        this.managerName = managerName;
-        this.address = address;
-        this.tag = tag;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getManagerName() {
-        return managerName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getTag() {
-        return tag;
     }
 }
