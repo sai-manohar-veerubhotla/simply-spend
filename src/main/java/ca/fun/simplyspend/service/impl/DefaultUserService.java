@@ -8,6 +8,7 @@ import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 @ApplicationScoped
 public class DefaultUserService implements UserService {
@@ -16,6 +17,7 @@ public class DefaultUserService implements UserService {
     UserDao userDao;
 
 
+    @Transactional
     @Override
     public Uni<User> getUser(int id) {
         return userDao.getUser(id);
