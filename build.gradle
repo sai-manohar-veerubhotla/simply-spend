@@ -16,8 +16,8 @@ dependencies {
     testImplementation 'io.quarkus:quarkus-junit5'
     implementation("io.quarkus:quarkus-hibernate-reactive")
     implementation("io.quarkus:quarkus-reactive-pg-client")
-    implementation("io.vertx:vertx-pg-client")
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate6")
 }
 
 group 'fun'
