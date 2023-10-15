@@ -26,7 +26,6 @@ public class DefaultUserSql implements UserDao {
         String query = String.format("""
                  SELECT * FROM "user" WHERE "id" = %d
                 """, id);
-        System.out.println("Query: " + query);
         return pgClient.query(query)
                 .execute()
                 .onItem().transformToUni(rows -> Uni.createFrom().item(rows.iterator().next()))
@@ -51,9 +50,10 @@ public class DefaultUserSql implements UserDao {
 
     @Override
     public Multi<User> getAllUsers(int limit) {
-        return pgClient.query(String.format("""
-                           SELECT * FROM "user" LIMIT %d
-                        """, limit))
+        String query = String.format("""
+                   SELECT * FROM "user" LIMIT %d
+                """, limit);
+        return pgClient.query(query)
                 .execute()
                 .onItem().transformToMulti(rows -> Multi.createFrom().iterable(rows))
                 .onItem().transform(map());
@@ -71,6 +71,7 @@ public class DefaultUserSql implements UserDao {
         }
     }
 
+    // for now, we just drop the table and recreate it on startup
     private void initDb() {
         pgClient.query("DROP TABLE IF EXISTS \"user\"").execute()
                 .flatMap(r -> pgClient.query("""
