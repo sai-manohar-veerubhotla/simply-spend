@@ -9,4 +9,5 @@ public interface UserService {
     Uni<User> getUser(int id);
 
     Multi<User> getAllUsers(int limit);
+    Uni<User> createUser(User user);
 }

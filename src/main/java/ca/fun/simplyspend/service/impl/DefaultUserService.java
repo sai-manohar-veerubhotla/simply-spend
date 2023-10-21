@@ -15,9 +15,6 @@ public class DefaultUserService implements UserService {
 
     @Inject
     UserDao userDao;
-
-
-    @Transactional
     @Override
     public Uni<User> getUser(int id) {
         return userDao.getUser(id);
@@ -26,5 +23,12 @@ public class DefaultUserService implements UserService {
     @Override
     public Multi<User> getAllUsers(int limit) {
         return userDao.getAllUsers(limit);
+    }
+
+
+    @Transactional
+    @Override
+    public Uni<User> createUser(User user) {
+        return userDao.createUser(user);
     }
 }

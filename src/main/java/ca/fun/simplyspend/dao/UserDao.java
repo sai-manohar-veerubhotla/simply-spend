@@ -9,4 +9,6 @@ public interface UserDao {
     Uni<User> getUser(int id);
 
     Multi<User> getAllUsers(int limit);
+
+    Uni<User> createUser(User user);
 }
