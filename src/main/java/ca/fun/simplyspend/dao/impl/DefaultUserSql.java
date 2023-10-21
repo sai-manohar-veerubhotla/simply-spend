@@ -45,5 +45,14 @@ public class DefaultUserSql implements UserDao {
                 .transformToMulti(users -> Multi.createFrom().iterable(users));
     }
 
+    @Override
+    public Uni<User> createUser(User user) {
+        return sessionFactory.withSession(session -> session.persist(user)
+                .chain(session::flush)
+                .onItem()
+                .transform(ignore -> user)
+        );
+    }
+
 
 }
